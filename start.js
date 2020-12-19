@@ -23,17 +23,6 @@ app.get('/triangulate', function(req, res) {
     let width  = req.query.width  / 2;
     let height = req.query.height;
 
-    const verts = [
-        {x: -width, y: 0, z: +length},
-        {x: +width, y: 0, z: +length},
-        {x: -width, y: +height, z: +length},
-        {x: +width, y: +height, z: +length},
-        {x: -width, y: 0, z: -length},
-        {x: +width, y: 0, z: -length},
-        {x: -width, y: +height, z: -length},
-        {x: +width, y: +height, z: -length}
-    ];
-
     res.contentType('json');
     res.send(triangulator.triangulate(length, width, height));
 });
