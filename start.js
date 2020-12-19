@@ -1,6 +1,7 @@
 let express = require('express');
 let app = express();
 let path = require('path');
+let triangulator = require('./build/Release/triangulator');
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
@@ -26,7 +27,7 @@ app.get('/triangulate', function(req, res) {
         {x: -width, y: 0, z: +length},
         {x: +width, y: 0, z: +length},
         {x: -width, y: +height, z: +length},
-        {x: +width, y: +height, z:  +length},
+        {x: +width, y: +height, z: +length},
         {x: -width, y: 0, z: -length},
         {x: +width, y: 0, z: -length},
         {x: -width, y: +height, z: -length},
@@ -34,7 +35,7 @@ app.get('/triangulate', function(req, res) {
     ];
 
     res.contentType('json');
-    res.send(JSON.stringify(verts));
+    res.send(triangulator.triangulate(length, width, height));
 });
 
 app.listen(8080);
